@@ -19,7 +19,9 @@ def home(request):
             return redirect('home')
     else:
         return render(request, 'home.html', {})
-
+#django logout 
 
 def logout_user(request):
-    pass
+    logout(request)
+    messages.success(request, " vous avez été déconnecté... ")
+    return redirect('home')
