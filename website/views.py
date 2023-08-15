@@ -2,9 +2,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import SignUpForm
+from .models import Record
 
 
 def home(request):
+    records = Record.objects.all()
     # vérifier si vous avez un compte
     if request.method == 'POST':
         username = request.POST['username']
@@ -19,7 +21,7 @@ def home(request):
             messages.success(request, "une erreur s'est produite lors de la connexion, veuillez réessayer...")
             return redirect('home')
     else:
-        return render(request, 'home.html', {})
+        return render(request, 'home.html', {'records':records})
 #django logout 
 
 def logout_user(request):
